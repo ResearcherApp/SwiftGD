@@ -34,6 +34,10 @@ public class Image {
     private init(gdImage: gdImagePtr) {
         self.internalImage = gdImage
     }
+  
+    public func copy(image: Image, destination: Point, source: Point, size: Size) {
+      gdImageCopy(internalImage, image.internalImage, Int32(destination.x), Int32(destination.y), Int32(source.x), Int32(source.y), Int32(size.width), Int32(size.height))
+    }
 
     public func resizedTo(width: Int, height: Int, applySmoothing: Bool = true) -> Image? {
         applyInterpolation(enabled: applySmoothing, currentSize: size, newSize: Size(width: width, height: height))
